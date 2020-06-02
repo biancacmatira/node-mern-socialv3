@@ -6,6 +6,7 @@
     "@material-ui/core": "^4.10.0",
     "@material-ui/icons": "^4.9.1",
     "cors": "^2.8.5",
+    "materialize-css": "^1.0.0-rc.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",

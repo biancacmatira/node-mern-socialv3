@@ -5,6 +5,7 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
+import 'materialize-css/dist/css/materialize.min.css';
 
 import Users from './user-feature/container/Users';
 import NewPlace from './places-feature/container/NewPlace';

@@ -16,7 +16,7 @@ const Users = () => {
       username: "Pepero",
       image:
         "https://lh3.googleusercontent.com/ko_FrkL3fY1bScY537UuzCu9qFjxKL3k-30p64DE_Z5XE2NKPjFjNkMpo2dk_eAU5e09OmB1iciOYgK-rJyRXaoi3bXa5FmN=w1200-h630-rj-pp-e365",
-      places: 3,
+      places: 0,
     },
     {
       id: Math.random(),
@@ -64,7 +64,7 @@ const Users = () => {
       id: Math.random(),
       username: "CoffeeBeat",
       image: "https://i.pinimg.com/236x/3d/04/21/3d04216926e29207200576ca95907d54.jpg",
-      places: 2
+      places: 1
     }
   ];
 
