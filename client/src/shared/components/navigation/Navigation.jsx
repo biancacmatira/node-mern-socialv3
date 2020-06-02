@@ -22,7 +22,7 @@ const Navigation = () => {
             <NavLink linkname="Login" />
           </ul>
 
-          <a href="#" data-target="slide-out" className="sidenav-trigger">
+          <a href="#!" data-target="slide-out" className="sidenav-trigger">
             <i className="material-icons">menu</i>
           </a>
         </div>

@@ -12,10 +12,10 @@ const UsersList = (props) => {
     );
   }
   return (
-    <div class="row">
+    <div className="row">
       {props.items.map((item) => (
         <div className="col s12 m6 l4 section" key={item.id}>
-          <Link to="/"><UserItem {...item} /></Link>
+          <Link to={`${item.id}/places`}><UserItem {...item} /></Link>
           
         </div>
       ))}
