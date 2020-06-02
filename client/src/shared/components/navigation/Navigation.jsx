@@ -20,7 +20,7 @@ const Navigation = () => {
           <ul className="right hide-on-med-and-down">
             <NavLink linkname="Home" />
             <NavLink linkname="My Places" link="/places" />
-            <NavLink linkname="Add Place" />
+            <NavLink linkname="Add Place" link="/places/new" />
             <NavLink linkname="Login" />
           </ul>
 

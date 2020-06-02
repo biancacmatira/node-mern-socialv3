@@ -1,7 +1,15 @@
 import React from 'react';
 
+import Input from '../../shared/components/Input';
+
 const NewPlace = () => {
-  return <h2>NewPlace Works!</h2>
+  return(
+    <div className="row center">
+      <form>
+
+      </form>
+    </div>
+  )
 };
 
 export default NewPlace;

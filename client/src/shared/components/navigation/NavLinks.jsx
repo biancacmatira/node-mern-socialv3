@@ -3,7 +3,7 @@ import React from "react";
 const NavLinks = (props) => {
   return (
     <li>
-      <a href="/">{props.linkname}</a>
+      <a href={props.link} >{props.linkname}</a>
     </li>
   );
 };
