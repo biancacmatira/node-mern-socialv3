@@ -1,6 +1,7 @@
 import React from 'react';
 
 const PlaceItem = (props) => {
+
     return (
         <div className="col s6 offset-s3">
             <div className="card">

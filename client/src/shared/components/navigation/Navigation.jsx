@@ -19,6 +19,8 @@ const Navigation = () => {
           </a>
           <ul className="right hide-on-med-and-down">
             <NavLink linkname="Home" />
+            <NavLink linkname="My Places" link="/places" />
+            <NavLink linkname="Add Place" />
             <NavLink linkname="Login" />
           </ul>
 
