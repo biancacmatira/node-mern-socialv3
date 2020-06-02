@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import Modal from 'react-modal'
 
+import Map from '../../shared/components/Map';
+
 const customStyles  = {
     overlay: {
         backgroundColor: "rgba(0,0,0,0.75)"
@@ -19,7 +21,6 @@ const customStyles  = {
 Modal.setAppElement('#modal-root');
 
 const PlaceItem = (props) => {
-
     const [showMap, setShowMap] = useState(false);
 
     const openMapHandler = () => setShowMap(true);
@@ -33,7 +34,13 @@ const PlaceItem = (props) => {
                 style={customStyles}
                 contentLabel={props.title}
             >
-                <h1>test</h1>
+                <Map 
+                    googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLEMAP_API}&v=3.exp&libraries=geometry,drawing,places`}
+                    loadingElement={<div style={{ height: '100%' }} />}
+                    containerElement={ <div style={{ height: '400px' }} /> }
+                    mapElement={<div style={{ height: '100%' }} />}
+                    coords={props.location}
+                />
                 <div className="modal-footer">
                     {props.address}
                     <button onClick={closeMapHandler}>close</button>
