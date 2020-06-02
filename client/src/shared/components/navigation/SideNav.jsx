@@ -10,7 +10,7 @@ const SideNav = () => {
         <div className="divider"></div>
       </li>
       <li>
-        <a className="subheader">Link</a>
+        <a href="/">First Link</a>
       </li>
     </ul>
   );

@@ -5,11 +5,11 @@
   "dependencies": {
     "@material-ui/core": "^4.10.0",
     "@material-ui/icons": "^4.9.1",
+    "@react-google-maps/api": "^1.9.4",
     "cors": "^2.8.5",
     "materialize-css": "^1.0.0-rc.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-google-maps": "^9.4.5",
     "react-modal": "^3.11.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
