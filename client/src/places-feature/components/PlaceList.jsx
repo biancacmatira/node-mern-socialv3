@@ -7,7 +7,7 @@ const PlaceList = (props) => {
         return(
             <div className="row center">
                 <h4>No Places found. Maybe create one?</h4>
-                <a href="#!" className="btn-floating btn-large"><i className="material-icons black">add</i></a>
+                <a href="/places/new" className="btn-floating btn-large"><i className="material-icons black">add</i></a>
             </div>
         )
     }

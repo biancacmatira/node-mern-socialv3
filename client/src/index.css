@@ -12,6 +12,21 @@
   box-sizing: border-box;
 }
 
+::-webkit-input-placeholder { /* WebKit browsers */
+  color:    red !important;
+   opacity: 1 !important;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: red;
+}
+
+::placeholder {
+  text-align: center;
+  font-size: x-small;
+  color: red !important;
+}
+
 html {
   font-family: 'Roboto', sans-serif;
 }

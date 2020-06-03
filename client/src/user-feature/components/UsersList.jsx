@@ -16,7 +16,6 @@ const UsersList = (props) => {
       {props.items.map((item) => (
         <div className="col s12 m6 l4 section" key={item.id}>
           <Link to={`${item.id}/places`}><UserItem {...item} /></Link>
-          
         </div>
       ))}
     </div>

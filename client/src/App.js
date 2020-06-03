@@ -11,6 +11,7 @@ import Users from './user-feature/container/Users';
 import NewPlace from './places-feature/container/NewPlace';
 import MainHeader from './shared/components/MainHeader';
 import UserPlaces from './places-feature/container/UserPlaces'
+import UpdatePlace from './places-feature/container/UpdatePlace';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/" exact component={Users} />
         <Route path="/:uid/places" exact component={UserPlaces} />
         <Route path="/places/new" exact component={NewPlace} />
+        <Route path="/places/:pid" component={UpdatePlace} />
         <Redirect to="/" />
       </Switch>
     </Router>

@@ -31,7 +31,7 @@ export const DUMMY_USERS = [
     id: 5,
     username: "Chiroru",
     image:
-      "https://lh3.googleusercontent.com/proxy/hrkZWDqk5iQkKFIIotZ5lCoHunAS8hK6IpMq0b87tMdFT_4Kidq8s0aKVSl43P5_RdWdLrjD1ZfL6m4qEgmCK-cPQr1QAvSELdF4Tu5QhJlvASuEjrAQVMsvqvxnJsbk8njLZZw1AOJZHq_qW8qp3_5987vadPlYDkQt2P6t4_I-Sg",
+      "https://www.takaski.com/wp-content/uploads/2019/11/CHIRORU-CHOCO-Mochi-Chocolate-Choco-Made-in-Japan4.jpg",
     places: 3,
   },
   {
@@ -65,7 +65,7 @@ export const DUMMY_USERS = [
 
 export const DUMMY_PLACES = [
   {
-      id: Math.random(),
+      id: 1,
       title: 'Jioufen',
       description: 'Visitors flock to Jiufen Old Street because it encapsulates the best of Taiwan in one small package: rich history, atmospheric lanes and teahouses, breathtaking views, and distinctly Taiwanese snacks at every turn.',
       imageUrl: 'https://images.unsplash.com/photo-1465385621528-53653983a38f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3753&q=80',
@@ -77,7 +77,7 @@ export const DUMMY_PLACES = [
       creator: 1
   },
   {
-      id: Math.random(),
+      id: 2,
       title: 'Vatican City',
       description: `Vatican City, a city-state surrounded by Rome, Italy, is the headquarters of the Roman Catholic Church. It's home to the Pope and a trove of iconic art and architecture. Its Vatican Museums house ancient Roman sculptures such as the famed “Laocoön and His Sons” as well as Renaissance frescoes in the Raphael Rooms and the Sistine Chapel, famous for Michelangelo’s ceiling.`,
       imageUrl: 'https://images.unsplash.com/photo-1531572753322-ad063cecc140?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2110&q=80',
@@ -89,7 +89,7 @@ export const DUMMY_PLACES = [
       creator: 1
   },
   {
-      id: Math.random(),
+      id: 3,
       title: 'Kitakyushu',
       description: `Kitakyushu is the northernmost city on Japan’s Kyushu Island. Kokura Castle is surrounded by Katsuyama Park, known for its spring cherry blossoms. Riverwalk Kitakyushu is a shopping mall by the Murasaki River. Northeast, Moji Port Retro Area has 1900s buildings, like the red-brick Moji Customs Building and striped Old Mitsui OSK Line Building.`,
       imageUrl: 'https://images.unsplash.com/photo-1567006166612-901644a89cb8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80',
@@ -101,7 +101,7 @@ export const DUMMY_PLACES = [
       creator: 1
   },
   {
-      id: Math.random(),
+      id: 4,
       title: 'Machu Picchu',
       description: 'Iconic hilltop ruins of a large 15th-century Inca city featuring numerous structures & terraces.',
       imageUrl: 'https://images.unsplash.com/photo-1526392060635-9d6019884377?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80',

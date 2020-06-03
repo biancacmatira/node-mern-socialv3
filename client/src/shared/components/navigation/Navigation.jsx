@@ -18,7 +18,7 @@ const Navigation = () => {
             <img src="/beenherelogo.png" alt="" />
           </a>
           <ul className="right hide-on-med-and-down">
-            <NavLink linkname="Home" />
+            <NavLink linkname="Home" link="/" />
             <NavLink linkname="My Places" link="/places" />
             <NavLink linkname="Add Place" link="/places/new" />
             <NavLink linkname="Login" />
