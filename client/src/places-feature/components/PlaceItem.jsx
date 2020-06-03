@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Modal from "react-modal";
 
 import Map from "../../shared/components/Map";
@@ -19,23 +20,24 @@ const customStylesA = {
 };
 
 const customStylesB = {
-    overlay: {
-      backgroundColor: "rgba(0,0,0,0.75)",
-    },
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      width: "50%",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-    },
-  };
+  overlay: {
+    backgroundColor: "rgba(0,0,0,0.75)",
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    width: "50%",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
 
 Modal.setAppElement("#modal-root");
 
 const PlaceItem = (props) => {
+  const history = useHistory();
   const [showMap, setShowMap] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
@@ -45,10 +47,14 @@ const PlaceItem = (props) => {
   const openDeleteHandler = () => setShowConfirm(true);
   const closeDeleteHandler = () => setShowConfirm(false);
 
+  const editHandler = (id) => {
+    history.push(`/places/${id}`);
+  };
+
   const confirmDeleteHandler = () => {
-      console.log("DELETED");
-      setShowConfirm(false);
-  }
+    console.log("DELETED");
+    setShowConfirm(false);
+  };
 
   return (
     <>
@@ -71,7 +77,9 @@ const PlaceItem = (props) => {
         contentLabel="Delete a place warning"
       >
         <div className="modal-header">Are you sure?</div>
-        <div className="modal-content">You are about to delete a place. Are you sure you want to that?</div>
+        <div className="modal-content">
+          You are about to delete a place. Are you sure you want to that?
+        </div>
         <div className="modal-footer">
           <button onClick={closeDeleteHandler}>Cancel</button>
           <button onClick={confirmDeleteHandler}>Delete</button>
@@ -89,7 +97,7 @@ const PlaceItem = (props) => {
           </div>
           <div className="card-action">
             <div>
-              <i className="material-icons geoloc" onClick={openMapHandler}>
+              <i className="material-icons clickable" onClick={openMapHandler}>
                 location_on
               </i>
               <span className="card-address" onClick={openMapHandler}>
@@ -97,10 +105,16 @@ const PlaceItem = (props) => {
               </span>
             </div>
             <div className="card-options">
-              <a href={`/places/${props.id}`}>
-                <i className="material-icons">mode_edit</i>
-              </a>
-              <i className="material-icons" onClick={openDeleteHandler}>
+              <i
+                className="material-icons clickable"
+                onClick={() => editHandler(props.id)}
+              >
+                mode_edit
+              </i>
+              <i
+                className="material-icons clickable"
+                onClick={openDeleteHandler}
+              >
                 delete
               </i>
             </div>

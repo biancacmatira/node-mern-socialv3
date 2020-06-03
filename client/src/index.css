@@ -74,7 +74,7 @@ p {
   text-decoration: underline;
 }
 
-.card-address:hover, .geoloc:hover{
+.card-address:hover, .clickable:hover{
   cursor: pointer;
 }
 
