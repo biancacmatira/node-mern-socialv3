@@ -2,60 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
-import TextareaAutosize from "react-textarea-autosize";
+// import TextareaAutosize from "react-textarea-autosize";
+import CustomTextInput from '../../shared/components/CustomTextInput';
 
 import { DUMMY_PLACES } from "../../data";
-
-const CustomTextInput = ({ label, ...props }) => {
-  const [field, meta] = useField(props);
-
-  if (props.type === "text") {
-    return (
-      <div className="input-field col s12">
-        <input {...field} {...props} />
-        <label className="white-text active" htmlFor={props.id || props.name}>
-          {label}
-        </label>
-        {meta.touched && meta.error ? (
-          <span className="helper-text" data-error={meta.error}>
-            {meta.error}
-          </span>
-        ) : null}
-      </div>
-    );
-  } else if (props.type === "password") {
-    return (
-      <div className="input-field col s12">
-        <input {...field} {...props} />
-        <label className="white-text active" htmlFor={props.id || props.name}>
-          {label}
-        </label>
-        {meta.touched && meta.error ? (
-          <span className="helper-text" data-error={meta.error}>
-            {meta.error}
-          </span>
-        ) : null}
-      </div>
-    );
-  }
-  return (
-    <div className="input-field col s12">
-      <TextareaAutosize
-        className="materialize-textarea"
-        {...field}
-        {...props}
-      />
-      <label className="white-text active" htmlFor={props.id || props.name}>
-        {label}
-      </label>
-      {meta.touched && meta.error ? (
-        <span className="helper-text" data-error={meta.error}>
-          {meta.error}
-        </span>
-      ) : null}
-    </div>
-  );
-};
 
 const UpdatePlaceFormik = () => {
   const [isLoading, setIsLoading] = useState(true);
