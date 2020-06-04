@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import TextareaAutosize from "react-textarea-autosize";
 
 import { DUMMY_PLACES } from "../../data";
-import Input from "../../shared/components/Input";
 
 const CustomTextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -96,41 +95,53 @@ const UpdatePlaceFormik = () => {
     );
   }
 
+  const validationSchema = Yup.object({
+    title: Yup.string()
+      .min(3, "Must be more than 3 characters")
+      .required("A title is require"),
+    description: Yup.string().required("A description is required"),
+    address: Yup.string().required("An address is required"),
+  });
+
   return (
     <div>
       <Formik
         initialValues={state}
-        validationSchema={}
-        onSubmit={(values, { isSubmitting, resetForm }) => {
+        validationSchema={validationSchema}
+        onSubmit={(values, { setSubmitting, resetForm }) => {
           //async api post call here
           //submit code hes
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
-            isSubmitting(false);
             resetForm();
+            setSubmitting(false);
           }, 500);
         }}
       >
         {(props) => {
           return (
-            <Form>
-              <h1>Edit a Place</h1>
-              <CustomTextInput label="Title" name="title" type="text" />
-              <CustomTextInput
-                label="Description"
-                name="description"
-                type="textarea"
-              />
-              <CustomTextInput label="Address" name="address" type="text" />
-              <button
-                className="waves-effect waves-light btn white-text green darken-4"
-                type="submit"
-                disabled={!!props.isSubmitting}
-              >
-                {props.isSubmitting ? "Loading..." : "Submit"}
-                <i className="material-icons right">send</i>
-              </button>
-            </Form>
+            <div className="row">
+              <div className="col s6 offset-s3">
+                <Form>
+                  <h1>Edit a Place</h1>
+                  <CustomTextInput label="Title" name="title" type="text" />
+                  <CustomTextInput
+                    label="Description"
+                    name="description"
+                    type="textarea"
+                  />
+                  <CustomTextInput label="Address" name="address" type="text" />
+                  <button
+                    className="waves-effect waves-light btn white-text green darken-4"
+                    type="submit"
+                    disabled={!!props.isSubmitting}
+                  >
+                    {props.isSubmitting ? "Loading..." : "Submit"}
+                    <i className="material-icons right">send</i>
+                  </button>
+                </Form>
+              </div>
+            </div>
           );
         }}
       </Formik>

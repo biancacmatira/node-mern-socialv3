@@ -12,6 +12,7 @@ import NewPlace from './places-feature/container/NewPlace';
 import MainHeader from './shared/components/MainHeader';
 import UserPlaces from './places-feature/container/UserPlaces'
 import UpdatePlace from './places-feature/container/UpdatePlace';
+import UpdatePlaceFormik from './places-feature/container/UpdatePlaceFormik'
 
 const App = () => {
   return (
@@ -21,7 +22,7 @@ const App = () => {
         <Route path="/" exact component={Users} />
         <Route path="/:uid/places" exact component={UserPlaces} />
         <Route path="/places/new" exact component={NewPlace} />
-        <Route path="/places/:pid" component={UpdatePlace} />
+        <Route path="/places/:pid" component={UpdatePlaceFormik} />
         <Redirect to="/" />
       </Switch>
     </Router>
