@@ -1,15 +1,11 @@
-import React, { useEffect } from "react";
-import M from "materialize-css/dist/js/materialize.min.js";
-
-import NavLinks from "./NavLinks";
-import SideNav from "./SideNav";
+import React from "react";
+import { SideNav } from "react-materialize";
 import { NavLink } from "react-router-dom";
 
+import NavLinks from "./NavLinks";
+import SideNavs from "./SideNavs";
+
 const Navigation = () => {
-  useEffect(() => {
-    let sidenav = document.querySelector("#slide-out");
-    M.Sidenav.init(sidenav, {});
-  }, []);
 
   return (
     <>
@@ -17,23 +13,23 @@ const Navigation = () => {
         <div className="nav-wrapper container">
           <NavLink to="/" exact>
             <div id="logo-container" className="brand-logo">
-              <img src="/beenherelogo.png" alt="" />
+              <img href="/" src="/beenherelogo.png" alt="" />
             </div>
           </NavLink>
           <ul className="right hide-on-med-and-down">
             <NavLinks />
-            {/* <NavLink linkname="Home" link="/" />
-            <NavLink linkname="My Places" link="/places" />
-            <NavLink linkname="Add Place" link="/places/new" />
-            <NavLink linkname="Login" /> */}
           </ul>
-
-          <a href="#!" data-target="slide-out" className="sidenav-trigger">
-            <i className="material-icons">menu</i>
-          </a>
         </div>
       </nav>
-      <SideNav />
+      <SideNav
+        id="SideNav-10"
+        options={{
+          draggable: true,
+        }}
+        trigger={<i id="sidenavmenu-trigger" className="material-icons icon-white">menu</i>}
+      >
+        <SideNavs />
+      </SideNav>
     </>
   );
 };

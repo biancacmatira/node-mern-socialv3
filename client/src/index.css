@@ -12,19 +12,29 @@
   box-sizing: border-box;
 }
 
+/* Change the white to any color ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px rgb(211, 135, 43) inset !important;
+}
+
+.helper-text{
+  color: red !important;
+}
+
 ::-webkit-input-placeholder { /* WebKit browsers */
-  color:    red !important;
-   opacity: 1 !important;
+  color: rgba(255, 255, 0, 0.399) !important;
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: red;
+  color: rgba(255, 255, 0, 0.399) !important;
 }
 
 ::placeholder {
-  text-align: center;
-  font-size: x-small;
-  color: red !important;
+  font-size: small;
+  color: rgba(255, 255, 255, 0.399) !important;
 }
 
 html {
@@ -48,6 +58,21 @@ nav .brand-logo img {
 
 p {
   line-height: 2rem;
+}
+
+i.icon-white {
+  color: white;
+}
+
+#sidenavmenu-trigger{
+  z-index: 998 !important;
+  position: absolute;
+  margin-top: -45px;
+  margin-left: 50px;
+}
+
+#sidenavmenu-trigger:hover{
+  cursor: pointer;
 }
 
 .card-title{
@@ -129,6 +154,12 @@ p {
 @media only screen and (max-width: 600px) {
   #index-banner .section {
     top: 0;
+  }
+}
+
+@media only screen and (min-width: 993px){
+  #sidenavmenu-trigger {
+    display: none !important;
   }
 }
 

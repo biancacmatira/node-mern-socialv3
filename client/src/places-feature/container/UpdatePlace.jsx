@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
-import M from "materialize-css/dist/js/materialize.min.js";
 
 import Input from "../../shared/components/Input";
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from "../../util/validators";
@@ -10,7 +9,6 @@ import { useForm } from "../../shared/hooks/FormHooks";
 const UpdatePlace = () => {
   const [isLoading, setIsLoading] = useState(true);
   const placeId = useParams().pid;
-
   
   const [formState, inputHandler, setFormData] = useForm(
     {

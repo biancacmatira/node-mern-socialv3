@@ -1,7 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
-  Route,
   Redirect,
   Switch
 } from 'react-router-dom';
@@ -14,50 +13,22 @@ import UserPlaces from './places-feature/container/UserPlaces'
 // import UpdatePlace from './places-feature/container/UpdatePlace';
 import UpdatePlaceFormik from './places-feature/container/UpdatePlaceFormik'
 import Auth from './user-feature/container/Auth';
-import { AuthContext } from './shared/context/auth-context';
+import PrivateRoute from './shared/route/PrivateRoute';
+import PublicRoute from './shared/route/PublicRoute';
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const login = useCallback(() => {
-    setIsLoggedIn(true);
-  });
-
-  const logout = useCallback(() => {
-    setIsLoggedIn(false);
-  });
-
-  let routes;
-
-  if (isLoggedIn) {
-    routes = (
+  return (
+    <Router>
+      <MainHeader />
       <Switch>
-        <Route path="/" exact component={Users} />
-        <Route path="/:uid/places" exact component={UserPlaces} />
-        <Route path="/places/new" exact component={NewPlace} />
-        <Route path="/places/:pid" component={UpdatePlaceFormik} />
+        <PublicRoute restricted={false} path="/" exact component={Users} />
+        <PublicRoute restricted={false} path="/:uid/places" component={UserPlaces} />
+        <PrivateRoute path="/places/new" exact component={NewPlace} />
+        <PrivateRoute path="/places/:pid" component={UpdatePlaceFormik} />
+        <PublicRoute restricted={true} path="/auth" component={Auth} />
         <Redirect to="/" />
       </Switch>
-    )
-  } else {
-    routes = (
-      <Switch>
-        <Route path="/" exact component={Users} />
-        <Route path="/:uid/places" exact component={UserPlaces} />
-        <Route path="/auth" component={Auth} />
-        <Redirect to="/auth" />
-      </Switch>
-    )
-  }
-
-
-  return (
-    <AuthContext.Provider value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}>
-      <Router>
-        <MainHeader />
-          {routes}
-      </Router>
-    </AuthContext.Provider>
+    </Router>
   );
 };
 

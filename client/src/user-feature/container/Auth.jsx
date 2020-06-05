@@ -1,33 +1,39 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
 
 import CustomTextInput from "../../shared/components/CustomTextInput";
-import { AuthContext } from "../../shared/context/auth-context";
 
 const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
-
-  const auth = useContext(AuthContext);
+  const dispatch = useDispatch();
 
   const switchModeHandler = () => {
     setIsLoginMode((prevMode) => !prevMode);
   };
 
   const validationSchema = Yup.object({
-    username: Yup.string().required("Required"),
+    username: Yup.string()
+      .min(3, "Must be at least 3 characters long")
+      .required("A title is required"),
     email: Yup.string()
-      .email()
-      .concat(!isLoginMode ? Yup.string().required("Yuyup") : null),
+      .concat(!isLoginMode ? Yup.string().required("Email is required") : null)
+      .email("Email is invalid"),
     password: Yup.string()
-      .required("Yo, no password?")
+      .min(6, "Password has to be longer than 6 characters!")
+      .required("Please Enter your password")
       .matches(
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-        " 8 chara, 1 upper, 1 lower, 1 special char"
+        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
       ),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null])
-      .concat(!isLoginMode ? Yup.string().required("Yuyup") : null),
+      .oneOf([Yup.ref("password"), null], "Passwords are not the same!")
+      .concat(
+        !isLoginMode
+          ? Yup.string().required("Password confirmation is required!")
+          : null
+      ),
   });
 
   return (
@@ -40,45 +46,67 @@ const Auth = () => {
           confirmPassword: "",
         }}
         validationSchema={validationSchema}
-        onSubmit={(value, { setSubmitting, resetForm }) => {
-          //do api call for login/signup
-          auth.login();
-          resetForm();
+        onSubmit={(values, { setSubmitting, resetForm }) => {
           setSubmitting(false);
+          resetForm();
+          dispatch({ type: "LOGIN" });
         }}
       >
         {(props) => {
           return (
             <>
-              <Form>
-                <h1>{isLoginMode ? "Sign In" : "Sign Up"}</h1>
-                <CustomTextInput label="Username" name="username" type="text" />
-                {!isLoginMode && (
-                  <CustomTextInput label="Email" name="email" type="text" />
-                )}
-                <CustomTextInput
-                  label="Password"
-                  name="password"
-                  type="password"
-                />
-                {!isLoginMode && (
-                  <CustomTextInput
-                    label="Confirm Password"
-                    name="confirmPassword"
-                    type="password"
-                  />
-                )}
+              <div className="row">
+                <div className="col s6 offset-s3">
+                  <Form>
+                    <h1>{isLoginMode ? "Sign In" : "Sign Up"}</h1>
+                    <CustomTextInput
+                      label="Username"
+                      name="username"
+                      type="text"
+                    />
+                    {!isLoginMode && (
+                      <CustomTextInput label="Email" name="email" type="text" />
+                    )}
+                    <CustomTextInput
+                      label="Password"
+                      name="password"
+                      type="password"
+                    />
+                    {!isLoginMode && (
+                      <CustomTextInput
+                        label="Confirm Password"
+                        name="confirmPassword"
+                        type="password"
+                      />
+                    )}
 
-                <button type="submit">Submit</button>
-              </Form>
-              <button
-                onClick={() => {
-                  switchModeHandler();
-                  props.resetForm();
-                }}
-              >
-                Switch to {isLoginMode ? "Signup" : "Sign In"}
-              </button>
+                    <button
+                      className="waves-effect waves-light btn white-text green darken-4"
+                      type="submit"
+                      disabled={props.isSubmitting}
+                    >
+                      {props.isSubmitting ? "Loading..." : "Submit"}
+                      <i className="material-icons right">send</i>
+                    </button>
+                  </Form>
+                </div>
+              </div>
+              <div className="divider row"></div>
+              <div className="col s6 offset-s3 center white-text">
+                {isLoginMode
+                  ? "Don't have an account yet? "
+                  : "Already have an account? "}
+                <button
+                  className="waves-effect waves-light btn-small deep-orange-text white accent-2 center"
+                  type="reset"
+                  onClick={() => {
+                    switchModeHandler();
+                    props.resetForm();
+                  }}
+                >
+                  Switch to {isLoginMode ? "Sign Up" : "Sign In"}
+                </button>
+              </div>
             </>
           );
         }}
