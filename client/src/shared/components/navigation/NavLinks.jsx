@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 const NavLinks = (props) => {
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const { isLoggedIn, userId } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   return (
@@ -16,7 +16,7 @@ const NavLinks = (props) => {
       </li>
       {isLoggedIn && (
         <li>
-          <NavLink to="/1/places">My Places</NavLink>
+          <NavLink to={`/${userId}/places`}>My Places</NavLink>
         </li>
       )}
       {isLoggedIn && (
@@ -33,7 +33,14 @@ const NavLinks = (props) => {
         <li>
           <Dropdown
             id="Dropdown_6"
-            trigger={<Button style={{backgroundColor: "#ffcc80",color: "#424242"}}node="button">User</Button>}
+            trigger={
+              <Button
+                style={{ backgroundColor: "#ffcc80", color: "#424242" }}
+                node="button"
+              >
+                User
+              </Button>
+            }
           >
             <NavLink to="/">Me</NavLink>
             <Divider />

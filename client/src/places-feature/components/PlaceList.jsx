@@ -1,13 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 import PlaceItem from "./PlaceItem";
 
 const PlaceList = (props) => {
-  const isLoggedIn = useSelector(state => state.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
-  if (props.places.length === 0) {
+  if (props.placesList.places.length === 0) {
     return (
       <div className="row center">
         {isLoggedIn ? (
@@ -28,8 +28,8 @@ const PlaceList = (props) => {
 
   return (
     <div className="row center">
-      {props.places.map((place) => (
-        <PlaceItem key={place.id} {...place} />
+      {props.placesList.places.map((place) => (
+        <PlaceItem key={place._id} {...place} />
       ))}
     </div>
   );

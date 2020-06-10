@@ -2,11 +2,23 @@ import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
+import Loader from "react-loader-spinner";
+import Modal from "react-modal";
 
 import CustomTextInput from "../../shared/components/CustomTextInput";
+import {
+  CustomStylesSpinner,
+  CustomStylesError,
+} from "../../shared/components/CustomStyles";
+import { useHttpClient } from "../../shared/hooks/HttpHook";
 
 const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
+  // const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  // const [error, setError] = useState();
+
+  const { isLoading, error, sendReq, clearError } = useHttpClient();
   const dispatch = useDispatch();
 
   const switchModeHandler = () => {
@@ -15,11 +27,11 @@ const Auth = () => {
 
   const validationSchema = Yup.object({
     username: Yup.string()
-      .min(3, "Must be at least 3 characters long")
-      .required("A title is required"),
-    email: Yup.string()
-      .concat(!isLoginMode ? Yup.string().required("Email is required") : null)
-      .email("Email is invalid"),
+      .concat(
+        !isLoginMode ? Yup.string().required("Username is required") : null
+      )
+      .min(3, "Must be at least 3 characters long"),
+    email: Yup.string().email("Email is invalid").required("Email is required"),
     password: Yup.string()
       .min(6, "Password has to be longer than 6 characters!")
       .required("Please Enter your password")
@@ -36,8 +48,97 @@ const Auth = () => {
       ),
   });
 
+  const authSubmitHandler = async (values) => {
+    if (isLoginMode) {
+      try {
+        // setIsLoading(true);
+        // const response = await fetch("http://localhost:5000/api/users/login", {
+        const fetchedUser = await sendReq(
+          "http://localhost:5000/api/users/login",
+          "POST",
+          { "Content-Type": "application/json" },
+          JSON.stringify({
+            email: values.email,
+            password: values.password,
+          })
+        );
+        // const resData = await response.json();
+
+        // if (!response.ok) {
+        //   throw new Error(resData.message);
+        // }
+
+        // setIsLoading(false);
+        dispatch({ type: "LOGIN", payload: fetchedUser.userProp._id });
+      } catch (err) {
+        // console.log(err);
+        // setIsLoading(false);
+        setIsError(true);
+        // setError(err.message || "Something went wrong, please try again.");
+      }
+    } else {
+      try {
+        //   setIsLoading(true);
+        //   const response = await fetch("http://localhost:5000/api/users/signup", {
+        const fetchedUser = await sendReq(
+          "http://localhost:5000/api/users/signup",
+          "POST",
+          { "Content-Type": "application/json" },
+          JSON.stringify({
+            username: values.username,
+            email: values.email,
+            password: values.password,
+          })
+        );
+        //   const resData = await response.json();
+        //   if (!response.ok) {
+        //     throw new Error(resData.message);
+        //   }
+        //   setIsLoading(false);
+        dispatch({ type: "LOGIN", payload: fetchedUser.userProp._id });
+      } catch (err) {
+        //   // console.log(err);
+        //   setIsLoading(false);
+        setIsError(true);
+        //   setError(err.message || "Something went wrong, please try again");
+      }
+    }
+  };
+
+  const errorHandler = () => {
+    // setError(null);
+    clearError();
+    setIsError(false);
+  }; // reset error handler
+
   return (
     <>
+      <Modal
+        isOpen={isError}
+        style={CustomStylesError}
+        onRequestClose={errorHandler}
+      >
+        <div className="modal-header">
+          <h3>An error occurred:</h3>
+        </div>
+        <div className="modal-content">{error}</div>
+        <button
+          onClick={errorHandler}
+          className="waves-effect wave-light btn-small deep-orange-text white right"
+        >
+          Close
+        </button>
+      </Modal>
+      <Modal isOpen={isLoading} style={CustomStylesSpinner}>
+        <Loader
+          type="Circles"
+          color="#FFF"
+          height={200}
+          width={200}
+          timeout={0}
+          visible={isLoading}
+        />
+      </Modal>
       <Formik
         initialValues={{
           username: "",
@@ -46,10 +147,12 @@ const Auth = () => {
           confirmPassword: "",
         }}
         validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting, resetForm }) => {
+        onSubmit={(values, { setSubmitting, resetForm, submitForm }) => {
           setSubmitting(false);
           resetForm();
-          dispatch({ type: "LOGIN" });
+          submitForm();
+          authSubmitHandler(values);
+          // dispatch({ type: "LOGIN" });
         }}
       >
         {(props) => {
@@ -59,14 +162,14 @@ const Auth = () => {
                 <div className="col s6 offset-s3">
                   <Form>
                     <h1>{isLoginMode ? "Sign In" : "Sign Up"}</h1>
-                    <CustomTextInput
-                      label="Username"
-                      name="username"
-                      type="text"
-                    />
                     {!isLoginMode && (
-                      <CustomTextInput label="Email" name="email" type="text" />
+                      <CustomTextInput
+                        label="Username"
+                        name="username"
+                        type="text"
+                      />
                     )}
+                    <CustomTextInput label="Email" name="email" type="text" />
                     <CustomTextInput
                       label="Password"
                       name="password"

@@ -21,7 +21,7 @@ const inputReducer = (state, action) => {
 
 const Input = (props) => {
   const [inputState, dispatch] = useReducer(inputReducer, {
-    value: props.initialValue || '',
+    value: props.initialValue || "",
     isValid: props.initialValid || false,
     isTouched: false,
   });
@@ -49,39 +49,39 @@ const Input = (props) => {
 
   const element =
     props.element === "input" ? (
-        <div className="input-field col s12">
-          <input
-            id={props.id}
-            type={props.type}
-            className={`validate ${
-              !inputState.isValid && inputState.isTouched && "invalid"
-            }`}
-            onChange={changeHandler}
-            onBlur={touchHandler}
-            value={inputState.value}
-          />
-        </div>
+      <div className="input-field col s12">
+        <input
+          id={props._id}
+          type={props.type}
+          className={`validate ${
+            !inputState.isValid && inputState.isTouched && "invalid"
+          }`}
+          onChange={changeHandler}
+          onBlur={touchHandler}
+          value={inputState.value}
+        />
+      </div>
     ) : (
-        <div className="input-field col s12">
-          <textarea
-            id={props.id}
-            rows={props.row || 6}
-            className={`materialize-textarea validate ${
-              !inputState.isValid && inputState.isTouched && "invalid"
-            }`}
-            onChange={changeHandler}
-            onBlur={touchHandler}
-            value={inputState.value}
-            placeholder=''
-          />
-        </div>
+      <div className="input-field col s12">
+        <textarea
+          id={props._id}
+          rows={props.row || 6}
+          className={`materialize-textarea validate ${
+            !inputState.isValid && inputState.isTouched && "invalid"
+          }`}
+          onChange={changeHandler}
+          onBlur={touchHandler}
+          value={inputState.value}
+          placeholder=""
+        />
+      </div>
     );
 
   return (
     <div className="input-field col s12">
       {element}
       {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
-      <label className="active white-text" htmlFor={props.id}>
+      <label className="active white-text" htmlFor={props._id}>
         {props.label}
       </label>
     </div>
